@@ -1,12 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-	<bean id="person" class="com.letslearnSpring.lowlevel.Person">
+	<bean id="person" class="com.letslearnSpring.lowlevel.Person"
+		scope="singleton" init-method="afterPerson"
+		destroy-method="destroyPerson">
 		<constructor-arg value="12451"></constructor-arg>
 		<constructor-arg value="Pablo Escobar"></constructor-arg>
 		<property name="taxId" value="2415"></property>
+		<property name="address" ref="address"></property>
 	</bean>
+	
+	<bean id="address" class="com.letslearnSpring.lowlevel.Address">
+		<constructor-arg value="WoodsLand"></constructor-arg>
+		<constructor-arg value="California"></constructor-arg>
+		<property name="phoneNumber">
+			<list value-type="java.lang.String">
+
+			<value type="java.lang.String">Rohit</value>
+			<value>Chaudhari</value>
+			</list>
+		</property>
+	</bean>
+	
 </beans>
