@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+
+	<bean id="apple" class="com.depenncies.injection.SpringDI.Apple">
+		<property name="name" value="Kashmiri"></property>
+	</bean>
+	<bean id="apple2" class="com.depenncies.injection.SpringDI.Apple">
+		<property name="name" value="Kashmiri2ss"></property>
+	</bean>
+	<bean id="orange" class="com.depenncies.injection.SpringDI.Orange">
+		<property name="name" value="${orange}"></property>
+	</bean>
+	<!-- <bean id="basket" class="com.depenncies.injection.SpringDI.Basket" 
+		autowire="byType"> </bean> -->
+	<bean id="shop" class="com.depenncies.injection.SpringDI.Shop">
+
+	</bean>
+	<context:annotation-config></context:annotation-config>
+	<context:component-scan base-package="com.depenncies.injection">
+	</context:component-scan>
+	<bean id="randomtext" class="com.depenncies.injection.SpringDI.RandomText">
+	</bean>
+	<bean id="person" class="com.depenncies.injection.SpringDI.Goldberg">
+		<property name="message" value="#{randomtext.getText()}"></property>
+	</bean>
+	<context:property-placeholder location="Config.properties" />
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driver}"></property>
+		<property name="url" value="${jdbc.url}"></property>
+		<property name="username" value="${user}"></property>
+		<property name="password" value="${password}"></property>
+	</bean>
+</beans>
