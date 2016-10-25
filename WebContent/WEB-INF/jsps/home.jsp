@@ -10,8 +10,9 @@
 </head>
 <body>
 	<sql:query var="rs" dataSource="jdbc/Spring">
-select Name,CountryCode bar from city
-</sql:query>
+select Name,CountryCode bar from city</sql:query>
+<img alt="" src="${pageContext.request.contextPath}/static/css/1.jpg">
+
 	<%-- <table>
 		<thead>
 			<tr>
