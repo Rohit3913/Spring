@@ -12,6 +12,7 @@ import org.apache.tomcat.jni.Error;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,17 +43,26 @@ public class EmployeeController {
 		return mav;
 	}
 
+	@RequestMapping(value = "/createemployee", method = RequestMethod.GET)
+	public String createEmployee(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession,
+			Model model) {
+		model.addAttribute("employee", new Employee());
+		return "EmployeeCreation";
+	}
+
 	@RequestMapping(value = "/submit", method = RequestMethod.POST)
 	public String addEmployee(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession,
-			@Valid Employee employee,BindingResult result) {
-		if(result.hasErrors()){
+			@Valid Employee employee, BindingResult result) {
+		if (result.hasErrors()) {
+
 			for (ObjectError error : result.getAllErrors()) {
 				System.out.println(error.getDefaultMessage());
 			}
-		
-		}else{
-		empDAO.createEmp(employee);
-		}return  "sucess";
-		
+			return "EmployeeCreation";
+		} else {
+			empDAO.createEmp(employee);
+			return "sucess";
+		}
+
 	}
 }

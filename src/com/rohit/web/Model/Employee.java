@@ -1,12 +1,20 @@
 package com.rohit.web.Model;
 
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.Type;
+
+import com.rohit.web.constraints.validProfession;
 
 public class Employee {
 	int id;
-	@Size(max=10)
+	@Size(max=10,message="More than 10 Characters not allowed")
 	String empName;
+	@Size(min=3,max=12)
 	String empCountry;
+	@Size(min=1)
+	@validProfession
 	String empProfession;
 	
 	public int getId() {
